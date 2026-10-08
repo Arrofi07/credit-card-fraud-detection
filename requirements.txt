@@ -11,7 +11,11 @@ joblib
 kaggle
 pytest
 
-# Phase 4: API. Streamlit (demo UI) deps are added in a later phase.
+# Phase 4: API.
 fastapi
 uvicorn
 httpx
+
+# Phase 5: Demo UI.
+streamlit
+requests

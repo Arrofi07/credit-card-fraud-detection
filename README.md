@@ -6,8 +6,8 @@ dataset — data → model → API → demo UI, using only free/no-cost tooling.
 See [PRD.md](PRD.md) for scope and roadmap, and [CLAUDE.md](CLAUDE.md) for
 working agreements in this repo.
 
-Status: Phase 4 (API) done. Demo UI is not yet implemented. See the phased
-roadmap in PRD.md.
+Status: Phase 5 (Demo UI) done. Containerization is not yet set up. See the
+phased roadmap in PRD.md.
 
 ## Setup
 
@@ -53,6 +53,18 @@ uvicorn src.api.main:app --reload
 Swagger docs at http://127.0.0.1:8000/docs. `POST /predict` expects the 30
 dataset fields (`Time`, `V1`-`V28`, `Amount`) and returns a fraud
 probability, a boolean decision, and the threshold applied.
+
+## Run the demo UI
+
+With the API running (see above), in another terminal:
+
+```bash
+streamlit run src/app/demo.py
+```
+
+Sample a legit or fraudulent transaction from the real dataset and send it
+to the API to see the prediction. Set `API_URL` if the API isn't on the
+default `http://127.0.0.1:8000`.
 
 ## Tests
 

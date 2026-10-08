@@ -59,8 +59,12 @@ end-to-end without needing paid services or cloud accounts.
    `GET /health` reports model-load status. Swagger docs at `/docs`.
    Smoke-tested against real fraud/legit rows from the dataset and covered
    by `tests/test_api.py`.
-5. **Demo UI**: Streamlit app that calls the API, lets a user try sample or
-   custom transactions, shows the prediction and probability.
+5. **Demo UI** (done): Streamlit app (`src/app/demo.py`) samples a real
+   legit or fraudulent row from `data/creditcard.csv`, shows its fields,
+   and sends it to the running API's `/predict` endpoint, displaying the
+   fraud probability and decision. Verified end-to-end headlessly via
+   Streamlit's `AppTest`: sampling a real fraud row and predicting returned
+   99.95% fraud probability, correctly flagged.
 6. **Containerization**: Dockerfile(s) + docker-compose for API + UI,
    running fully locally.
 7. **Future work (not started yet)**: experiment tracking with MLflow, test
