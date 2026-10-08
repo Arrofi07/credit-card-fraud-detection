@@ -37,13 +37,20 @@ the repo (recruiters, collaborators) who wants to see the model working
 end-to-end without needing paid services or cloud accounts.
 
 ## 6. Phased Roadmap
-1. **Bootstrap** (this pass): CLAUDE.md, PRD.md, repo scaffold, git init.
-2. **Data & EDA**: Kaggle download instructions, EDA notebook (class balance,
-   feature distributions, correlation, V1–V28 behavior by class).
-3. **Modeling**: baseline (Logistic Regression + class weights), main model
-   (XGBoost/LightGBM), imbalance handling strategy chosen and justified,
-   evaluation via PR-AUC/recall/precision/F1/confusion matrix, model saved
-   via joblib.
+1. **Bootstrap** (done): CLAUDE.md, PRD.md, repo scaffold, git init.
+2. **Data & EDA** (done): Kaggle download script, EDA notebook (class
+   balance, Amount/Time behavior, V1–V28 separation). See
+   `notebooks/01_eda.ipynb`.
+3. **Modeling** (done): compared class-weighted Logistic Regression, SMOTE +
+   Logistic Regression, and class-weighted XGBoost in
+   `notebooks/02_modeling.ipynb`. XGBoost won clearly (PR-AUC 0.853 vs.
+   ~0.72 for both Logistic Regression variants); SMOTE gave no measurable
+   edge over class weighting, so class weighting (`scale_pos_weight`) is the
+   shipped imbalance strategy (see `src/train.py`). At the best-F1
+   threshold (0.940): precision 0.909, recall 0.816, F1 0.860 on the held-out
+   test set (8 false positives, 18 false negatives out of 56,962 rows).
+   `scripts/train_model.py` reproduces this end-to-end and saves
+   `models/fraud_model.joblib` + `reports/metrics.json`.
 4. **API**: FastAPI service wrapping the saved model, `/predict` endpoint,
    input validation, Swagger docs.
 5. **Demo UI**: Streamlit app that calls the API, lets a user try sample or
