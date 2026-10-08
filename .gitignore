@@ -1,0 +1,23 @@
+# Data & model artifacts
+data/*
+!data/.gitkeep
+*.csv
+*.joblib
+*.pkl
+mlruns/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+*.egg-info/
+
+# Env / secrets
+.env
+kaggle.json
+
+# Editors / OS
+.DS_Store
+.vscode/
+.idea/
