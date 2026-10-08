@@ -6,8 +6,8 @@ dataset — data → model → API → demo UI, using only free/no-cost tooling.
 See [PRD.md](PRD.md) for scope and roadmap, and [CLAUDE.md](CLAUDE.md) for
 working agreements in this repo.
 
-Status: Phase 3 (Modeling) done. API and UI are not yet implemented. See the
-phased roadmap in PRD.md.
+Status: Phase 4 (API) done. Demo UI is not yet implemented. See the phased
+roadmap in PRD.md.
 
 ## Setup
 
@@ -43,6 +43,16 @@ python scripts/train_model.py
 
 Trains the class-weighted XGBoost model, saves `models/fraud_model.joblib`
 (gitignored) and `reports/metrics.json` (tracked).
+
+## Run the API
+
+```bash
+uvicorn src.api.main:app --reload
+```
+
+Swagger docs at http://127.0.0.1:8000/docs. `POST /predict` expects the 30
+dataset fields (`Time`, `V1`-`V28`, `Amount`) and returns a fraud
+probability, a boolean decision, and the threshold applied.
 
 ## Tests
 

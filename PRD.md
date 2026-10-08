@@ -51,8 +51,14 @@ end-to-end without needing paid services or cloud accounts.
    test set (8 false positives, 18 false negatives out of 56,962 rows).
    `scripts/train_model.py` reproduces this end-to-end and saves
    `models/fraud_model.joblib` + `reports/metrics.json`.
-4. **API**: FastAPI service wrapping the saved model, `/predict` endpoint,
-   input validation, Swagger docs.
+4. **API** (done): FastAPI service (`src/api/main.py`) wraps
+   `models/fraud_model.joblib`, loaded at startup via a lifespan handler.
+   `POST /predict` takes the 30 dataset fields (validated via Pydantic),
+   returns `fraud_probability`, `is_fraud` (probability vs. the tuned
+   threshold from `reports/metrics.json`), and the threshold used.
+   `GET /health` reports model-load status. Swagger docs at `/docs`.
+   Smoke-tested against real fraud/legit rows from the dataset and covered
+   by `tests/test_api.py`.
 5. **Demo UI**: Streamlit app that calls the API, lets a user try sample or
    custom transactions, shows the prediction and probability.
 6. **Containerization**: Dockerfile(s) + docker-compose for API + UI,

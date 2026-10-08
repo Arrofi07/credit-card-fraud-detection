@@ -1,5 +1,4 @@
-# Phase 2-3 deps: data acquisition, EDA, and modeling.
-# FastAPI/Streamlit deps are added in later phases (API, Demo UI).
+# Phase 2-3: data acquisition, EDA, and modeling.
 pandas
 numpy
 matplotlib
@@ -11,3 +10,8 @@ xgboost
 joblib
 kaggle
 pytest
+
+# Phase 4: API. Streamlit (demo UI) deps are added in a later phase.
+fastapi
+uvicorn
+httpx
