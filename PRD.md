@@ -65,8 +65,15 @@ end-to-end without needing paid services or cloud accounts.
    fraud probability and decision. Verified end-to-end headlessly via
    Streamlit's `AppTest`: sampling a real fraud row and predicting returned
    99.95% fraud probability, correctly flagged.
-6. **Containerization**: Dockerfile(s) + docker-compose for API + UI,
-   running fully locally.
+6. **Containerization** (done): Single `Dockerfile` (python:3.12-slim),
+   `docker-compose.yml` runs `api` (port 8000) and `ui` (port 8501) as
+   separate services on one network, `ui` reaching `api` at
+   `http://api:8000`. `models/`, `reports/`, and `data/` are mounted as
+   read-only volumes (not baked into the image) since they're
+   user-generated/downloaded, not build artifacts. Verified with a real
+   `docker compose up`: both containers started, `/health` and `/predict`
+   worked from the host, and the UI container reached the API container
+   over the internal network.
 7. **Future work (not started yet)**: experiment tracking with MLflow, test
    suite expansion, CI via GitHub Actions, free cloud hosting (Hugging Face
    Spaces for the UI, Render/Railway free tier for the API), model monitoring

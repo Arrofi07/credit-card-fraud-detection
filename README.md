@@ -6,8 +6,8 @@ dataset — data → model → API → demo UI, using only free/no-cost tooling.
 See [PRD.md](PRD.md) for scope and roadmap, and [CLAUDE.md](CLAUDE.md) for
 working agreements in this repo.
 
-Status: Phase 5 (Demo UI) done. Containerization is not yet set up. See the
-phased roadmap in PRD.md.
+Status: Phase 6 (Containerization) done — all core phases complete. See
+Future Work in PRD.md for what's intentionally left out.
 
 ## Setup
 
@@ -65,6 +65,19 @@ streamlit run src/app/demo.py
 Sample a legit or fraudulent transaction from the real dataset and send it
 to the API to see the prediction. Set `API_URL` if the API isn't on the
 default `http://127.0.0.1:8000`.
+
+## Run everything with Docker
+
+Requires `models/fraud_model.joblib` and `data/creditcard.csv` to already
+exist on the host (see Train/Get the data above) — they're mounted into the
+containers, not baked into the image.
+
+```bash
+docker compose up --build
+```
+
+API on http://localhost:8000, UI on http://localhost:8501 (reaching the API
+at `http://api:8000` over the compose network).
 
 ## Tests
 
